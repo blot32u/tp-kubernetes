@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podkube
+  labels:
+    app: motd
+    env: prod   
+spec:
+  containers:
+  - name: motd
+    image: blot32u/motd-api
+    ports:
+    - containerPort: 5555
