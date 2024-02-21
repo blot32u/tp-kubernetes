@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: motd-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: tristan-blot.amnay.fr
+    http:
+      paths:
+      - path: /motd
+        pathType: Prefix
+        backend:
+          service:
+            name: motd-canary-service
+            port:
+              number: 80

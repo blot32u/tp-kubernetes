@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: motd-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: motd
+  template:
+    metadata:
+      labels:
+        app: motd
+    spec:
+      containers:
+      - name: motd
+        image: blot32u/motd-api
+        ports:
+        - containerPort: 3000  # Port sur lequel le conteneur écoute

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: motd-canary-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: motd
+  template:
+    metadata:
+      labels:
+        app: motd
+    spec:
+      containers:
+      - name: motd
+        image: blot32u/motd-api
+        env:
+        - name: MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: motd-config  # Nom de la ConfigMap créée précédemment
+              key: message
